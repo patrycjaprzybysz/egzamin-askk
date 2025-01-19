@@ -27,7 +27,7 @@ uruchom ww. skrypt wewnątrz kontenera.
 
 
 
-1. Utwórz plik z obrazem Dockerfile, w którym z hosta do kontenera kopiowany będzie folder code (zawiera np. jeden skrypt w języku Python 🐍) i zbuduj go:
+1.1 Utwórz plik z obrazem Dockerfile, w którym z hosta do kontenera kopiowany będzie folder code (zawiera np. jeden skrypt w języku Python 🐍) i zbuduj go:
 uruchom ww. skrypt wewnątrz kontenera.
 
 
@@ -40,7 +40,7 @@ docker build -t python-script .
 docker run --rm python-script
 ```
 
-2. Skopiuj wybrany plik tekstowy z hosta (swojego komputera) do kontenera Dockerowego.
+2.1. Skopiuj wybrany plik tekstowy z hosta (swojego komputera) do kontenera Dockerowego.
 
 1. stworzenie kontenera
 ```
@@ -67,7 +67,7 @@ cd /app
 cat myfile.txt
 ```
 
-3. Skopiuj wybrany plik tekstowy z kontenera Dockerowego do hosta (swojego komputera).
+3.1. Skopiuj wybrany plik tekstowy z kontenera Dockerowego do hosta (swojego komputera).
 
 1. 
 
