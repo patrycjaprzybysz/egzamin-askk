@@ -17,6 +17,7 @@ uruchom ww. skrypt wewnątrz kontenera.
   Zademonstruj dowolny sposób.
 12. Zbuduj wybrany przez siebie obraz, nadaj mu 'tag' i opublikuj na DockerHubie. Następnie usuń lokalnie ww. obraz i pobierz go z DockerHuba.
 
+****
 
 
 
@@ -24,8 +25,7 @@ uruchom ww. skrypt wewnątrz kontenera.
 
 
 
-
-
+****
 
 1.1 Utwórz plik z obrazem Dockerfile, w którym z hosta do kontenera kopiowany będzie folder code (zawiera np. jeden skrypt w języku Python 🐍) i zbuduj go:
 uruchom ww. skrypt wewnątrz kontenera.
