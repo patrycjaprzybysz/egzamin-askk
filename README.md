@@ -144,6 +144,7 @@ SELECT * FROM users;
 
 **6.1 Pokaż działanie komend ADD i COPY i WORKDIR w wybranym projekcie.**
 
+```add``` działa jak ```copy``` Kopiuje pliki i katalogi z lokalnego systemu plików do systemu plików obrazu Docker z tą różnica ze moze kopiować z linku i pliki tar. ```workdir``` utworzy katalog jesli nie istenije, ustawia katalog roboczy dla wszystkich kolejnych instrukcji tzn. jesli ustawimy katalog /app to wszytskie polecenia np COPY test.txt będą zapisywane w tym katalogu
 
 1. 
 
@@ -198,9 +199,10 @@ Kontener (ang. container) to instancja uruchomionego obrazu. Kontener działa na
 * **RUN pip install --no-cache-dir -r requirements.txt:** Instalujemy zależności Pythona, jeśli są one określone w requirements.txt.
 * **COPY app.py ./:** Kopiujemy aplikację app.py do kontenera.
 * **CMD ["python", "app.py"]:** Określamy, że po uruchomieniu kontenera ma zostać uruchomiona aplikacja Python (app.py).
-
+****
+****
 * budowanie obrazu z dockerfile ```docker build -t my-python-app . ```
-*uruchamianie kontenera ```docker run --name my-python-container my-python-app ```
+* uruchamianie kontenera ```docker run --name my-python-container my-python-app ```
 
 
 **11.1 Pokaż jak "wejść" do wybranego kontenera.
@@ -208,7 +210,55 @@ Utwórz w nim plik tekstowy z dowolnymi danymi. Co zrobić, żeby po zamknięciu
 Zademonstruj dowolny sposób.**
 
 
+1. wejscie do kontenera
+```
+docker exec -it mycontainer /bin/bash
+```
+2. utworzenie pliku i sprawdzenie zawartsci pliku
+```
+echo "Hello, Docker!" > /tmp/myfile.txt
+cat /tmp/myfile.txt
+```
+3. zatrzymanie, i uruchomienie kontenera oraz sprawdzenie zawartosci pliku (nie ma go - trzeba zroibc kontener z voluminem)
+```
+docker stop my-python-container
+docker start my-python-container
+docker exec -it my-python-container /bin/bash
+cat /tmp/myfile.txt
+```
 
+4. utworzenie kontenera z voluminem i wejscie do niego
+```
+docker run -it --name container -v volume python /bin/bash
+```
+
+5. dodanie pliku
+```
+echo "Hello from Docker with volume!" > /tmp/myfile.txt
+```
+6. zatrzymanie, uruchomienie wejscie do kontenera i wyswietlenie pliku
+```
+docker stop my-python-container
+docker start my-python-container
+docker exec -it my-python-container /bin/bash
+cat /tmp/myfile.txt
+```
 **12.1 Zbuduj wybrany przez siebie obraz, nadaj mu 'tag' i opublikuj na DockerHubie. Następnie usuń lokalnie ww. obraz i pobierz go z DockerHuba.**
 
-
+1. ustawienie wszytskich plikow i zbudowanie obrazu
+```
+docker build -t patrycjaprzybysz/python-app:tag .
+```
+2. wypchniecie na dockerHub
+```
+docker push patrycjaprzybysz/python-app:tag
+```
+3. usuniecie loklanie i pobranie z dockerhub
+```
+docker rmi patrycjaprzybysz/python-app:tag
+docker pull patrycjaprzybysz/python-app:tag
+```
+4. uruchomienie kontenera z pobranego obrazu
+```
+docker run --name my-python-container patrycjaprzybysz/python-app:tag
+```
