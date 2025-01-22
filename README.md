@@ -146,7 +146,30 @@ SELECT * FROM users;
 
 ```add``` działa jak ```copy``` Kopiuje pliki i katalogi z lokalnego systemu plików do systemu plików obrazu Docker z tą różnica ze moze kopiować z linku i pliki tar. ```workdir``` utworzy katalog jesli nie istenije, ustawia katalog roboczy dla wszystkich kolejnych instrukcji tzn. jesli ustawimy katalog /app to wszytskie polecenia np COPY test.txt będą zapisywane w tym katalogu
 
-1. 
+1. ```docker build -t my-basic-docker .```
+2. ``` docker run my-basic-docker```
+
+3. 
+```WORKDIR /app```
+Co robi:
+
+* Ustawia katalog roboczy w kontenerze na /app.
+* Wszystkie kolejne instrukcje, takie jak COPY, ADD i RUN, będą wykonywane względnie do tego katalogu.
+* Jeśli katalog /app nie istnieje, zostanie automatycznie utworzony.
+* Jest to odpowiednik cd /app dla kolejnych poleceń.
+
+```COPY my_script.sh .```
+Co robi:
+
+* Kopiuje plik my_script.sh z Twojego lokalnego systemu (tam, gdzie znajduje się Dockerfile) do katalogu roboczego w kontenerze (/app dzięki WORKDIR).
+* Kopiuje pliki bez żadnych dodatkowych operacji, działa czysto jako kopia.
+* Obsługuje tylko lokalne pliki i katalogi.
+
+```ADD my_archive.tar.gz .```
+Co robi:
+
+* Kopiuje plik my_archive.tar.gz z lokalnego systemu do katalogu roboczego kontenera (/app).
+* Dodatkowa funkcjonalność: jeśli podany plik to archiwum .tar.gz, Docker je automatycznie rozpakowuje do wskazanej lokalizacji.
 
 
 **7.1 Pokaż działanie docker compose w swoim projekcie.**
